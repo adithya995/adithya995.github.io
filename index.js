@@ -53,19 +53,15 @@ function output(input) {
     fetchData(text)
   .then(data => {
     console.log(data);
-    product=data// Process the response data
+    product=data
+    setTimeout(addChat(input, product), 2000000);// Process the response data
   })
   .catch(error => {
     console.error('Error:', error);
   });
     	  
-  } else {
-    // If all else fails: random alternative
-    product = alternative[Math.floor(Math.random() * alternative.length)];
-  }
-
-  // Update DOM
-  addChat(input, product);
+  } 
+  ;
 }
 
 function compare(promptsArray, repliesArray, string) {
