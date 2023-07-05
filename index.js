@@ -28,6 +28,13 @@ function fetchData(text) {
 }
 
 function output(input) {
+  const messagesContainer = document.getElementById("messages");
+
+  let userDiv = document.createElement("div");
+  userDiv.id = "user";
+  userDiv.className = "user response";
+  userDiv.innerHTML = `<img src="user.png" class="avatar"><span>${input}</span>`;
+  messagesContainer.appendChild(userDiv);
   let product;
 
   // Regex remove non word/space chars
@@ -87,12 +94,6 @@ function compare(promptsArray, repliesArray, string) {
 
 function addChat(input, product) {
   const messagesContainer = document.getElementById("messages");
-
-  let userDiv = document.createElement("div");
-  userDiv.id = "user";
-  userDiv.className = "user response";
-  userDiv.innerHTML = `<img src="user.png" class="avatar"><span>${input}</span>`;
-  messagesContainer.appendChild(userDiv);
 
   let botDiv = document.createElement("div");
   let botImg = document.createElement("img");
