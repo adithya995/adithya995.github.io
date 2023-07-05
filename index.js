@@ -31,7 +31,7 @@ function output(input) {
     product = compare(prompts, replies, text);
   } else if (text.match(/thank/gi)) {
     product = "You're welcome!"
-  } else if (text.match(/(corona|covid|virus)/gi)) {
+  } else if (text.match()) {
 	  fetch('https://mc-b2x.azurewebsites.net/api/emchat?name='+text, {
   method: 'POST',
   headers: {
@@ -48,8 +48,14 @@ function output(input) {
     // Handle any errors
     console.error('Error:', error);
   });
+  setTimeout(() => {
+    botText.innerText = `${product}`;
+    textToSpeech(product)
+  }, 20000
+  )
     // If no match, check if message contains `coronavirus`
-    product = coronavirus[Math.floor(Math.random() * coronavirus.length)];
+    product = data
+    	  
   } else {
     // If all else fails: random alternative
     product = alternative[Math.floor(Math.random() * alternative.length)];
