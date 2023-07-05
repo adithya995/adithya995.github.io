@@ -32,7 +32,7 @@ function output(input) {
   } else if (text.match(/thank/gi)) {
     product = "You're welcome!"
   } else if (text.match(/(corona|covid|virus)/gi)) {
-	  fetch('https://mc-b2x.azurewebsites.net/api/emchat', {
+	  fetch('https://mc-b2x.azurewebsites.net/api/emchat?name='+text, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
