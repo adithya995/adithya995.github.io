@@ -9,6 +9,24 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function fetchData(text) {
+  return new Promise((resolve, reject) => {
+    fetch('https://mc-b2x.azurewebsites.net/api/emchat?name='+text,{
+      method: 'POST'
+    })
+      .then(response => {
+        if (response.ok) {
+          resolve(response.text());
+        } else {
+          reject(new Error('Request failed with status: ' + response.status));
+        }
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+}
+
 function output(input) {
   let product;
 
@@ -32,29 +50,14 @@ function output(input) {
   } else if (text.match(/thank/gi)) {
     product = "You're welcome!"
   } else if (text.match()) {
-	  fetch('https://mc-b2x.azurewebsites.net/api/emchat?name='+text, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ key: 'value' })
-})
-  .then(response => response.text())
+    fetchData(text)
   .then(data => {
-    // Handle the response data
     console.log(data);
+    product=data// Process the response data
   })
   .catch(error => {
-    // Handle any errors
     console.error('Error:', error);
   });
-  setTimeout(() => {
-    botText.innerText = `${product}`;
-    textToSpeech(product)
-  }, 20000
-  )
-    // If no match, check if message contains `coronavirus`
-    product = data
     	  
   } else {
     // If all else fails: random alternative
