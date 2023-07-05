@@ -108,7 +108,7 @@ function addChat(input, product) {
   messagesContainer.appendChild(botDiv);
   // Keep messages at most recent
   messagesContainer.scrollTop = messagesContainer.scrollHeight - messagesContainer.clientHeight;
-
+  product=product.replace(/\n/g, '\n')
   // Fake delay to seem "real"
   setTimeout(() => {
     botText.innerText = `${product}`;
