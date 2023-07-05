@@ -39,7 +39,7 @@ function output(input) {
   },
   body: JSON.stringify({ key: 'value' })
 })
-  .then(response => response.json())
+  .then(response => response.text())
   .then(data => {
     // Handle the response data
     console.log(data);
