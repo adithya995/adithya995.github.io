@@ -32,8 +32,8 @@ span {
 }
 
 .chat {
-	height: 300px;
-	width: 50vw;
+	height: 800px;
+	width: 56vw;
 	display: flex;
 	flex-direction: column;
   justify-content: center;
