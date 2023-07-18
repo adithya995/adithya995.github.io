@@ -109,7 +109,8 @@ function addChat(input, product) {
   // Keep messages at most recent
   messagesContainer.scrollTop = messagesContainer.scrollHeight - messagesContainer.clientHeight;
   //product=product.replace(/\n/g, '\n')
-  const chatresponse=product[0].id
+  const chatresponse=product[0].message
+  chatresponse=chatresponse.replace(/\n/g, '\n')
   botText.innerText += `${chatresponse}`;
   botText.innerText+='\n';
   product.forEach(prod => {
@@ -117,7 +118,7 @@ function addChat(input, product) {
     const productUrl = prod.productUrl;
     const imageUrl = prod.imageUrl;
     botText.innerText += `${productName}`;
-    botText.innerText+='\n';
+    botText.innerText+='\n\n';
     botText.innerText += `${productUrl}`;
   });
   // Fake delay to seem "real"
