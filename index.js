@@ -117,8 +117,8 @@ function addChat(input, product) {
   product.forEach(prod => {     
     let productName = prod.productName;
     let productUrl = prod.productUrl;
-    hyperlink.href=productUrl
-    hyperlink.innerText='---Click to Purchase this product---'
+    hyperlink.href=productUrl;
+    hyperlink.innerText='---Click to Purchase this product---';
     let imageUrl = prod.imageUrl;
     botText.innerText+='\n\n';
     botText.innerText += `${productName}`;
