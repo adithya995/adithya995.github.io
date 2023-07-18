@@ -123,7 +123,7 @@ function addChat(input, product) {
     botText.innerText+='\n\n';
     botText.innerText += `${productName}`;
     botText.innerText+='\n\n';
-    botText.appendChild(hyperlink);
+    botText.appendChild(hyperlink).appendChild(hyperlink.previousSibling);
     //botText.innerText += `${productUrl}`;
   });
   // Fake delay to seem "real"
