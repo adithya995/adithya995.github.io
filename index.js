@@ -111,7 +111,7 @@ function addChat(input, product) {
   //product=product.replace(/\n/g, '\n')
   let chatresponse=product[0].message
   chatresponse=chatresponse.replace(/\n/g, '\n')
-  botText.innerText += `${chatresponse}`;
+  botText.innerText = `${chatresponse}`;
   botText.innerText+='\n';
   product.forEach(prod => {
     const hyperlink = document.createElement('a');    
@@ -120,6 +120,7 @@ function addChat(input, product) {
     hyperlink.href=productUrl
     hyperlink.innerText='---Click to Purchase this product---'
     const imageUrl = prod.imageUrl;
+    botText.innerText+='\n\n';
     botText.innerText += `${productName}`;
     botText.innerText+='\n\n';
     botText.appendChild(hyperlink);
