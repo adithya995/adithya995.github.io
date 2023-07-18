@@ -114,6 +114,8 @@ function addChat(input, product) {
   chatresponse=chatresponse.replace(/\n/g, '\n')
   botText.innerText = `${chatresponse}`;
   botText.innerText+='\n';
+  let breakelement1=document.createElement('br');
+  botText.appendChild(breakelement1);
   product.forEach(prod => {
     let spanElement = document.createElement('span');     
     let productName = prod.productName;
@@ -128,6 +130,8 @@ function addChat(input, product) {
     botText.appendChild(spanElement);
     let breakelement=document.createElement('br');
     botText.appendChild(breakelement);
+    let breakelement2=document.createElement('br');
+    botText.appendChild(breakelement2);
     //botText.innerText += `${productUrl}`;
   });
   // Fake delay to seem "real"
