@@ -16,7 +16,7 @@ function fetchData(text) {
     })
       .then(response => {
         if (response.ok) {
-          resolve(response.text());
+          resolve(response.json());
         } else {
           reject(new Error('Request failed with status: ' + response.status));
         }
@@ -108,7 +108,14 @@ function addChat(input, product) {
   messagesContainer.appendChild(botDiv);
   // Keep messages at most recent
   messagesContainer.scrollTop = messagesContainer.scrollHeight - messagesContainer.clientHeight;
-  product=product.replace(/\n/g, '\n')
+  //product=product.replace(/\n/g, '\n')
+  product.forEach(prod => {
+    const productName = prod.productName;
+    const productUrl = prod.productUrl;
+    const imageUrl = prod.imageUrl;
+    botText.innerText += `${productName}`;
+    botText.innerText += `${productUrl}`;
+  });
   // Fake delay to seem "real"
   setTimeout(() => {
     botText.innerText = `${product}`;
