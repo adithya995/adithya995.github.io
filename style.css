@@ -76,6 +76,10 @@ input {
 	height: 25px;
 }
 
+.prodclass {
+	height: 200px;
+}
+
 .response {
 	display: flex;
 	align-items: center;
