@@ -126,6 +126,8 @@ function addChat(input, product) {
     spanElement.innerText+='\n\n';
     spanElement.innerHTML += '<a href='+productUrl+'>---Click to Purchase this product---</a>';
     botText.appendChild(spanElement);
+    let breakelement=document.createElement('br');
+    botText.appendChild(breakelement);
     //botText.innerText += `${productUrl}`;
   });
   // Fake delay to seem "real"
