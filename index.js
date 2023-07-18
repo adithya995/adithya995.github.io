@@ -114,17 +114,18 @@ function addChat(input, product) {
   chatresponse=chatresponse.replace(/\n/g, '\n')
   botText.innerText = `${chatresponse}`;
   botText.innerText+='\n';
-  product.forEach(prod => {     
+  product.forEach(prod => {
+    const spanElement = document.createElement('span');     
     let productName = prod.productName;
     let productUrl = prod.productUrl;
-    hyperlink.href=productUrl;
-    hyperlink.innerText='---Click to Purchase this product---';
+    hyperlink.href=productUrl
+    hyperlink.innerText='---Click to Purchase this product---'
     let imageUrl = prod.imageUrl;
-    botText.innerText+='\n\n';
-    botText.innerText += `${productName}`;
-    botText.innerText+='\n\n';
-    botText.innerHTML += '<a href='+productUrl+'>---Click to Purchase this product---</a>';
-    //botText.appendChild(hyperlink).appendChild(hyperlink.previousSibling);
+    spanElement.innerText+='\n\n';
+    spanElement.innerText += `${productName}`;
+    spanElement.innerText+='\n\n';
+    spanElement.innerHTML += '<a href='+productUrl+'>---Click to Purchase this product---</a>';
+    botText.appendChild(spanElement);
     //botText.innerText += `${productUrl}`;
   });
   // Fake delay to seem "real"
