@@ -131,6 +131,7 @@ function addChat(input, product) {
     let breakelement=document.createElement('br');
     botText.appendChild(breakelement);
     let imageelemtnt=document.createElement("img");
+    imageelemtnt.className = "prodclass";
     imageelemtnt.src = imageUrl;
     botText.appendChild(imageelemtnt);
     let breakelement2=document.createElement('br');
