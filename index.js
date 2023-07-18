@@ -98,6 +98,7 @@ function addChat(input, product) {
   let botDiv = document.createElement("div");
   let botImg = document.createElement("img");
   let botText = document.createElement("span");
+  let hyperlink = document.createElement('a');
   botDiv.id = "bot";
   botImg.src = "bot-mini.png";
   botImg.className = "avatar";
@@ -113,8 +114,7 @@ function addChat(input, product) {
   chatresponse=chatresponse.replace(/\n/g, '\n')
   botText.innerText = `${chatresponse}`;
   botText.innerText+='\n';
-  product.forEach(prod => {
-    let hyperlink = document.createElement('a');    
+  product.forEach(prod => {     
     let productName = prod.productName;
     let productUrl = prod.productUrl;
     hyperlink.href=productUrl
