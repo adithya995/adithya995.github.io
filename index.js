@@ -109,16 +109,20 @@ function addChat(input, product) {
   // Keep messages at most recent
   messagesContainer.scrollTop = messagesContainer.scrollHeight - messagesContainer.clientHeight;
   //product=product.replace(/\n/g, '\n')
+  const chatresponse=product[0].id
+  botText.innerText += `${chatresponse}`;
+  botText.innerText+='\n';
   product.forEach(prod => {
     const productName = prod.productName;
     const productUrl = prod.productUrl;
     const imageUrl = prod.imageUrl;
     botText.innerText += `${productName}`;
+    botText.innerText+='\n';
     botText.innerText += `${productUrl}`;
   });
   // Fake delay to seem "real"
   setTimeout(() => {
-    botText.innerText = `${product}`;
+    //botText.innerText = `${product}`;
   }, 2000
   )
 
