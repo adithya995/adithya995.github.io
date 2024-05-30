@@ -140,7 +140,7 @@ function addChat(input, product) {
   });
   // Fake delay to seem "real"
   setTimeout(() => {
-    //botText.innerText = `${product}`;
+    //botText.innerText = `${product}`;yeah man
   }, 2000
   )
 
