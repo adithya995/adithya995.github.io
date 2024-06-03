@@ -1,101 +1,64 @@
-* {
-  box-sizing: border-box;
-}
-
-html {
-	height: 100%;
-
-}
-
 body {
-  font-family: 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, Helvetica,
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-	background-color: rgba(223, 242, 247, .5);
-	height: 100%;
-	margin: 0;
-}
-
-span {
-	padding-right: 15px;
-	padding-left: 15px;
-}
-
-.container {
-	display: flex;
+  display: flex;
   justify-content: center;
-	align-items: center;
-	width: 100%;
-	height: 100%;
+  align-items: center;
+  height: 100vh;
+  background: #f0f0f0;
+  font-family: Arial, sans-serif;
+  margin: 0;
 }
 
-.chat {
-	height: 600px;
-	width: 56vw;
-	display: flex;
-	flex-direction: column;
-  justify-content: center;
-	align-items: center;
-} 
-
-::-webkit-input-placeholder { 
-	color: .711 
-}
- 
-input { 
-	border: 0; 
-	padding: 15px; 
-	margin-left: auto;
-	border-radius: 10px; 
+#chat-container {
+  width: 90%;
+  max-width: 600px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.messages {
-	display: flex;
-	flex-direction: column;
-	overflow: scroll;
-	height: 90%;
-	width: 100%;
-	background-color: white;
-	padding: 15px;
-	margin: 15px;
-	border-radius: 10px;
+#messages {
+  padding: 20px;
+  flex: 1;
+  overflow-y: auto;
 }
 
-#bot {
-	margin-left: auto;
+#messages .response {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.bot {
-	font-family: Consolas, 'Courier New', Menlo, source-code-pro, Monaco,  
-	monospace;
+#messages .user {
+  justify-content: flex-end;
+}
+
+#messages .bot {
+  justify-content: flex-start;
 }
 
 .avatar {
-	height: 25px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+#input {
+  border: none;
+  padding: 20px;
+  font-size: 16px;
+  border-top: 1px solid #ddd;
+}
+
+#input:focus {
+  outline: none;
 }
 
 .prodclass {
-	height: 200px;
-}
-
-.response {
-	display: flex;
-	align-items: center;
-	margin: 1%;
-}
-
-
-/* Mobile */
-
-@media only screen and (max-width: 980px) {
-  .container {
-		flex-direction: column; 
-		justify-content: flex-start;
-	}
-	.chat {
-		width: 75vw;
-		margin: 10vw;
-	}
+  width: 100%;
+  max-width: 150px;
+  margin: 10px 0;
 }
