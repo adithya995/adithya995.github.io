@@ -1,23 +1,16 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<title>Chatbot</title>
-	<link rel="icon" href="bot.png" />
-	<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chatbot</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-	<div id="container" class="container">
-		<div id="chat-container" class="chat">
-			<div id="messages" class="messages"></div>
-			<input id="input" type="text" placeholder="Say something..." autocomplete="off" autofocus="true" />
-		</div>
-		<img src="https://uploads-ssl.webflow.com/5f15081919fdf673994ab5fd/63e05b42f46ebfbc65a734bc_OpenAI%20GPT%20Logo.svg" alt="Robot cartoon" height="100vh">
-	</div>
+  <div id="chat-container">
+    <div id="messages"></div>
+    <input id="input" type="text" placeholder="Type your message here..." autofocus>
+  </div>
+  <script src="script.js"></script>
 </body>
-<script type="text/javascript" src="index.js" ></script>
-<script type="text/javascript" src="constants.js" ></script>
-<script type="text/javascript" src="speech.js" ></script>
-
 </html>
