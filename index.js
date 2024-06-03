@@ -11,19 +11,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function fetchData(text) {
   return new Promise((resolve, reject) => {
-    fetch('https://mc-b2x.azurewebsites.net/api/emchat?name='+text,{
+    fetch('https://mc-b2x.azurewebsites.net/api/emchat?name=' + text, {
       method: 'POST'
     })
       .then(response => {
         if (response.ok) {
-          resolve(response.json());
+          return response.json();
         } else {
           reject(new Error('Request failed with status: ' + response.status));
         }
       })
-      .catch(error => {
-        reject(error);
-      });
+      .then(data => resolve(data))
+      .catch(error => reject(error));
   });
 }
 
@@ -35,113 +34,91 @@ function output(input) {
   userDiv.className = "user response";
   userDiv.innerHTML = `<img src="user.png" class="avatar"><span>${input}</span>`;
   messagesContainer.appendChild(userDiv);
-  let product;
-
-  // Regex remove non word/space chars
-  // Trim trailing whitespce
-  // Remove digits - not sure if this is best
-  // But solves problem of entering something like 'hi1'
 
   let text = input.toLowerCase().replace(/[^\w\s]/gi, "").replace(/[\d]/gi, "").trim();
   text = text
-    .replace(/ a /g, " ")   // 'tell me a story' -> 'tell me story'
+    .replace(/ a /g, " ")
     .replace(/i feel /g, "")
     .replace(/whats/g, "what is")
     .replace(/please /g, "")
     .replace(/ please/g, "")
     .replace(/r u/g, "are you");
 
-  if (compare(prompts, replies, text)) { 
-    // Search for exact match in `prompts`
-    product = compare(prompts, replies, text);
+  if (compare(prompts, replies, text)) {
+    let product = compare(prompts, replies, text);
+    addChat(input, product);
   } else if (text.match(/thank/gi)) {
-    product = "You're welcome!"
-  } else if (text.match()) {
+    let product = "You're welcome!";
+    addChat(input, product);
+  } else {
     fetchData(text)
-  .then(data => {
-    console.log(data);
-    product=data
-    setTimeout(addChat(input, product), 2000000);// Process the response data
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-    	  
-  } 
-  ;
+      .then(data => {
+        addChat(input, data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
 }
 
 function compare(promptsArray, repliesArray, string) {
-  let reply;
-  let replyFound = false;
   for (let x = 0; x < promptsArray.length; x++) {
     for (let y = 0; y < promptsArray[x].length; y++) {
       if (promptsArray[x][y] === string) {
         let replies = repliesArray[x];
-        reply = replies[Math.floor(Math.random() * replies.length)];
-        replyFound = true;
-        // Stop inner loop when input value matches prompts
-        break;
+        return replies[Math.floor(Math.random() * replies.length)];
       }
     }
-    if (replyFound) {
-      // Stop outer loop when reply is found instead of interating through the entire array
-      break;
-    }
   }
-  return reply;
+  return null;
 }
 
 function addChat(input, product) {
   const messagesContainer = document.getElementById("messages");
 
   let botDiv = document.createElement("div");
-  let botImg = document.createElement("img");
-  let botText = document.createElement("span");
-  let hyperlink = document.createElement('a');
   botDiv.id = "bot";
+  botDiv.className = "bot response";
+
+  let botImg = document.createElement("img");
   botImg.src = "bot-mini.png";
   botImg.className = "avatar";
-  botDiv.className = "bot response";
-  botText.innerText = "Typing...";
-  botDiv.appendChild(botText);
-  botDiv.appendChild(botImg);
-  messagesContainer.appendChild(botDiv);
-  // Keep messages at most recent
-  messagesContainer.scrollTop = messagesContainer.scrollHeight - messagesContainer.clientHeight;
-  //product=product.replace(/\n/g, '\n')
-  let chatresponse=product[0].message
-  chatresponse=chatresponse.replace(/\n/g, '\n')
-  botText.innerText = `${chatresponse}`;
-  botText.innerText+='\n';
-  let breakelement1=document.createElement('br');
-  botText.appendChild(breakelement1);
-  product.forEach(prod => {
-    let spanElement = document.createElement('span');     
-    let productName = prod.productName;
-    let productUrl = prod.productUrl;
-    hyperlink.href=productUrl
-    hyperlink.innerText='---Click to Purchase this product---'
-    let imageUrl = prod.imageUrl;
-    spanElement.innerText+='\n\n';
-    spanElement.innerText += `${productName}`;
-    spanElement.innerText+='\n\n';
-    spanElement.innerHTML += '<a href='+productUrl+'>---Click to Purchase this product---</a>';
-    botText.appendChild(spanElement);
-    let breakelement=document.createElement('br');
-    botText.appendChild(breakelement);
-    let imageelemtnt=document.createElement("img");
-    imageelemtnt.className = "prodclass";
-    imageelemtnt.src = imageUrl;
-    botText.appendChild(imageelemtnt);
-    let breakelement2=document.createElement('br');
-    botText.appendChild(breakelement2);
-    //botText.innerText += `${productUrl}`;
-  });
-  // Fake delay to seem "real"
-  setTimeout(() => {
-    //botText.innerText = `${product}`;yeah man
-  }, 2000
-  )
 
+  let botText = document.createElement("span");
+  botText.innerText = "Typing...";
+  
+  botDiv.appendChild(botImg);
+  botDiv.appendChild(botText);
+  messagesContainer.appendChild(botDiv);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight - messagesContainer.clientHeight;
+
+  setTimeout(() => {
+    if (typeof product === 'string') {
+      botText.innerText = product;
+    } else {
+      let chatResponse = product[0].message.replace(/\n/g, '\n');
+      botText.innerText = chatResponse;
+
+      product.forEach(prod => {
+        let productElement = document.createElement('div');
+
+        let productName = document.createElement('span');
+        productName.innerText = prod.productName;
+        productElement.appendChild(productName);
+
+        let productLink = document.createElement('a');
+        productLink.href = prod.productUrl;
+        productLink.innerText = '---Click to Purchase this product---';
+        productElement.appendChild(productLink);
+
+        let productImage = document.createElement('img');
+        productImage.src = prod.imageUrl;
+        productImage.className = 'prodclass';
+        productElement.appendChild(productImage);
+
+        botDiv.appendChild(productElement);
+      });
+    }
+    messagesContainer.scrollTop = messagesContainer.scrollHeight - messagesContainer.clientHeight;
+  }, 1000);
 }
